@@ -5,6 +5,8 @@ import com.practica.library.model.Book;
 import com.practica.library.model.BookDTO;
 import com.practica.library.service.BookService;
 import com.practica.library.service.BookServiceJPA;
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,13 +17,14 @@ import java.util.logging.Logger;
 @Log4j2
 @RestController
 @RequestMapping("/book")
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class BookController {
 
     Logger logger = Logger.getLogger("BookController");
 
-    private final BookService bookService;
-    private final BookServiceJPA bookServiceJPA;
-    private final ObjectMapper mapper;
+    BookService bookService;
+    BookServiceJPA bookServiceJPA;
+    ObjectMapper mapper;
 
     public BookController(BookService bookService, ObjectMapper mapper, BookServiceJPA bookServiceJPA) {
         this.bookService = bookService;
@@ -95,5 +98,11 @@ public class BookController {
     public ResponseEntity<BookDTO> lostBook(@PathVariable Long id) {
         BookDTO updateBook = bookServiceJPA.lostBook(id);
         return ResponseEntity.ok(updateBook);
+    }
+
+    @GetMapping("/book/lostList/{lostOrNot}")
+    public ResponseEntity<List<BookDTO>> lostOrNotList(@PathVariable("lostOrNot") boolean lostOrNot){
+        List<BookDTO>lostOrNotList=bookServiceJPA.findBooksThatAreLost(lostOrNot);
+        return ResponseEntity.ok(lostOrNotList);
     }
 }

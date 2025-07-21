@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 public class BookData {
 
     @Bean
-    // bean (method) that runs when the app starts
+        // bean (method) that runs when the app starts
     CommandLineRunner commandLineRunner(BookRepositoryJPA bookRepositoryJPA) {
 
         return args -> {

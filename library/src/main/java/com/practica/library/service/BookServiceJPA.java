@@ -32,7 +32,7 @@ public class BookServiceJPA {
 
         return mapper.convertValue(bookRepositoryJPA.save(book), BookDTO.class);
     }
-/////////////////////TEMA 1///////////////////////
+
     public BookDTO lostBook(Long id) {
         Book book = bookRepositoryJPA.findById(id)
                 .orElseThrow(() -> new RuntimeException("Book not found with id: " + id));
@@ -42,5 +42,21 @@ public class BookServiceJPA {
 
         return mapper.convertValue(book, BookDTO.class);
     }
-///////////////////////////////////////////////////
+
+    public List<BookDTO> findBooksThatAreLost(boolean lostOrNot) {
+        if (lostOrNot) {
+
+            return bookRepositoryJPA.findBooksThatAreLost()
+                    .stream()
+                    .map(book -> mapper.convertValue(book, BookDTO.class))
+                    .toList();
+        }
+        return bookRepositoryJPA.findBooksThatAreNotLost()
+                .stream()
+                .map(book -> mapper.convertValue(book, BookDTO.class))
+                .toList();
+
+    }
+
 }
+

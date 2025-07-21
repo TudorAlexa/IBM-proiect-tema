@@ -9,15 +9,15 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 @Repository
-public class    BookRepository {
+public class BookRepository {
 
     Logger logger = Logger.getLogger("BookRepository");
     private final List<Book> books = new ArrayList<>();
     private Long id = 0L;
 
     public BookRepository(){
-        Book book1 = new Book(++id, "Inteligenta emotionala", "Daniel Hoffman");
-        Book book2 = new Book(++id, "Bani", "Daniel McWilliams");
+        Book book1 = new Book(++id, "Inteligenta emotionala", "Daniel Hoffman",false);
+        Book book2 = new Book(++id, "Bani", "Daniel McWilliams",false);
         books.add(book1);
         books.add(book2);
     }

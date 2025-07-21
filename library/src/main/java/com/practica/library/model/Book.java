@@ -26,14 +26,18 @@ public class Book {
     @Column(name = "author")
     private String author;
 
+    @Column(name= "lost")
+    private boolean lost;
+
     public Book() {
 
     }
 
-    public Book(Long id, String name, String author) {
+    public Book(Long id, String name, String author, boolean lost) {
         this.id = id;
         this.author = author;
         this.name = name;
+        this.lost = lost;
     }
 
     public Long getId() {
@@ -68,7 +72,6 @@ public class Book {
                 ", author='" + author + '\'' +
                 '}';
     }
-
     public void setLost(boolean b) {
     }
 }

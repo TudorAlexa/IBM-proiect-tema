@@ -18,7 +18,7 @@ public class BookDTO {
     public BookDTO(String name, String author) {
         this.author = author;
         this.name = name;
-        lost = false;
+        lost=false;
     }
 
     public void setAuthor(String author) {
@@ -42,6 +42,7 @@ public class BookDTO {
         return "{" +
                 "\"name\":\"" + name + "\"," +
                 "\"author\":\"" + author + "\"" +
+                "\"lost\":\"" + lost + "\"" +
                 "}";
     }
 
